@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "galio-framework";
-import HomeScreen from "./HomeScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   View,
@@ -8,11 +7,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ScrollView,
   Share,
-  Platform,
-  Linking,
-  Animated,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -24,12 +19,10 @@ function CardDetails({ route, navigation: { goBack } }) {
       ${image_url}.`,
     });
   };
-  const { first_name, last_name, img, id, image_url } = route.params;
+  const { first_name, last_name, img, image_url } = route.params;
   return (
     <>
       <View style={styles.cardDetailsBox}>
-        {/* <Text style={styles.tileNumber}>Tile: {id}</Text> */}
-
         <TouchableOpacity onPress={() => navigation.navigate("Modal", { img })}>
           <Image source={{ uri: img }} style={styles.image} />
         </TouchableOpacity>

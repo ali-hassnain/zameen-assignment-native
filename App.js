@@ -1,7 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList, Modal } from "react-native";
-import Data from "./data/Data";
-import Card from "./components/Card";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
@@ -12,37 +10,39 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          contentStyle: {
-            backgroundColor: "#FFFFFF",
-          },
-        }}
-      >
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            headerShown: false,
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            contentStyle: {
+              backgroundColor: "#FFFFFF",
+            },
           }}
-        />
-        <Stack.Screen
-          name="CardDetails"
-          component={CardDetails}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Modal"
-          component={ModalScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+        >
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="CardDetails"
+            component={CardDetails}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Modal"
+            component={ModalScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 

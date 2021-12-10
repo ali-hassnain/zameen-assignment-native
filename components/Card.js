@@ -14,16 +14,14 @@ function Card(props) {
   return (
     <TouchableOpacity
       key={props.id}
-      onPress={
-        // () => console.log("hello")
-        () =>
-          navigation.navigate("CardDetails", {
-            id: props.id,
-            first_name: props.first_name,
-            last_name: props.last_name,
-            img: props.img,
-            image_url: props.image_url,
-          })
+      onPress={() =>
+        navigation.navigate("CardDetails", {
+          id: props.id,
+          first_name: props.first_name,
+          last_name: props.last_name,
+          img: props.img,
+          image_url: props.image_url,
+        })
       }
     >
       <View style={styles.card}>
@@ -31,9 +29,7 @@ function Card(props) {
           <Image style={styles.image} source={{ uri: props.img }} />
         </View>
         <View style={styles.cardDetails}>
-          <Text style={styles.cardDetailsTile}>
-            {props.first_name} {props.last_name}
-          </Text>
+          <Text style={styles.cardDetailsTile}>{props.first_name} </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -58,11 +54,13 @@ const styles = StyleSheet.create({
   },
   cardDetails: {
     justifyContent: "center",
+    width: "70%",
   },
   cardDetailsTile: {
+    width: "100%",
     fontSize: 18,
-    // fontWeight: "bold",
     textAlign: "center",
+    fontWeight: "bold",
     color: "#000",
   },
 });

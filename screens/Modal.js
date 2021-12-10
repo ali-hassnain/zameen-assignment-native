@@ -7,7 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import ReactNativeZoomableView from "@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView";
+import { ReactNativeZoomableView } from "@dudigital/react-native-zoomable-view";
 
 const { width } = Dimensions.get("window");
 
@@ -40,7 +40,7 @@ function ModalScreen({ route, navigation: { goBack } }) {
           source={{ uri: img }}
           style={{
             width: width,
-            height: "60%",
+            height: "80%",
           }}
         ></Image>
       </ReactNativeZoomableView>

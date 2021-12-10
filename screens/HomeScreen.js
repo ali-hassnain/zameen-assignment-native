@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import Data from "../data/Data";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import Card from "../components/Card";
-
-// import axios from "axios";
 
 export default function HomeScreen() {
   const [data, setData] = useState([]);
@@ -13,29 +15,18 @@ export default function HomeScreen() {
   const [page, setPage] = useState(1);
 
   const fetchData = async () => {
-    // await AsyncStorage.setItem("imageData", data.download_url);
-
     setPage((prev) => prev + 1);
     try {
+      setLoading(true);
       const response = await fetch(
         `https://picsum.photos/v2/list?page=${page}&limit=15`
       );
       const data = await response.json();
-
-      // console.log("data1:", data);
-      console.log("page:", page);
       if (page > 1) {
         setData((prevData) => [...prevData, ...data]);
-
-        // console.log("data:", data);
       } else {
         setData(data);
-        // const imageUrl = data.map((img) => img.download_url);
-        // console.log("imageUrl:", imageUrl);
-        // AsyncStorage.setItem("image", imageUrl);
       }
-
-      // console.log("data2", data);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -46,30 +37,31 @@ export default function HomeScreen() {
 
   useEffect(() => {
     fetchData();
-    // storeData();
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Zameen.com Interview Project</Text>
-      <FlatList
-        data={data}
-        // initialNumToRender={30}
-        onEndReachedThreshold={5}
-        onEndReached={fetchData}
-        renderItem={({ item }) => (
-          <Card
-            item={item}
-            id={item.id}
-            img={item.download_url}
-            first_name={item.author}
-            image_url={item.download_url}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={true}
-      />
-    </View>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.title}>Zameen.com Interview Project</Text>
+        {loading ? <ActivityIndicator size="large" color="#383f96" /> : null}
+        <FlatList
+          data={data}
+          onEndReached={fetchData}
+          onEndReachedThreshold={0.5}
+          renderItem={({ item }) => (
+            <Card
+              item={item}
+              id={item.id}
+              img={item.download_url}
+              first_name={item.author}
+              image_url={item.download_url}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={true}
+        />
+      </View>
+    </>
   );
 }
 
@@ -86,6 +78,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#383f96",
   },
+  loading: { textAlign: "center" },
   card: {
     backgroundColor: "#F0F0F2",
     borderRadius: 10,
